@@ -11,7 +11,7 @@ class HabitationService {
           maison ? "maison.png" : "appartement.png",
           "${maison ? 'Maison' : 'Appartement'} ${index}", "Rue ${index}",
           2 + index%3, 2 + index%2,
-          ((maison ? 100 : 50) + index) as double,
+          (maison ? 100 : 50) + index,
           ((maison ? 600 : 400) + index).toDouble());
   });
 

@@ -4,11 +4,12 @@ class Habitation {
   String image;
   String libelle;
   String adresse;
+  int nbpersonnes;
   int chambres;
   int superficie;
   double prixmois;
 
-  Habitation(this.id, this.typeHabitat, this.image, this .libelle, this.adresse, this.chambres, this.superficie, this.prixmois, double double);
+  Habitation(this.id, this.typeHabitat, this.image, this .libelle, this.adresse, this.nbpersonnes, this.chambres, this.superficie, this.prixmois);
 }
 
 class TypeHabitat {

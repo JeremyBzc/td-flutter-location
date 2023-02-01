@@ -69,7 +69,7 @@ class _HabitationDetailsState extends State<HabitationDetails> {
             margin: EdgeInsets.symmetric(horizontal: 8.0),
             child: ElevatedButton(
               onPressed: () {
-                print('Louer habitation')
+                print('Louer habitation');
               },
               child: Text('Louer'),
             ),

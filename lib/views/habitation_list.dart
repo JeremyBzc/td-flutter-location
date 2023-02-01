@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:location/models/habitation.dart';
 import 'package:location/services/habitation_service.dart';
+import 'package:location/views/habitation_details.dart';
 import 'habitation_option.dart';
 
 
@@ -35,22 +36,31 @@ class HabitationList extends StatelessWidget {
   _buildRow(Habitation habitation, BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(4.0),
-      child: Column(
-        children: [
-          Container(
-            height: 150,
-            width: MediaQuery.of(context).size.width,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset(
-                'assets/images/locations/${habitation.image}',
-                fit: BoxFit.fitWidth,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HabitationDetails(habitation))
+          );
+        },
+        child: Column(
+          children: [
+            Container(
+              height: 150,
+              width: MediaQuery.of(context).size.width,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: Image.asset(
+                  'assets/images/locations/${habitation.image}',
+                  fit: BoxFit.fitWidth,
+                ),
               ),
             ),
-          ),
-          _buildDetails(habitation),
-        ],
-      ),
+            _buildDetails(habitation),
+          ],
+        ),
+      )
     );
   }
   _buildDetails(Habitation habitation) {
