@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:location/models/habitation.dart';
 import 'package:location/share/location_style.dart';
-import 'package:location/views/habitation_option.dart';
+import 'package:location/share/location_text_style.dart';
+import 'package:location/views/share/habitation_option.dart';
+
 
 class HabitationDetails extends StatefulWidget {
  final Habitation _habitation;
@@ -18,7 +20,10 @@ class _HabitationDetailsState extends State<HabitationDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget._habitation.libelle),
+        title: Text(
+          widget._habitation.libelle,
+          style: LocationTextStyle.boldTextStyle
+        ),
       ),
       body: ListView(
         padding: EdgeInsets.all(4.0),
@@ -32,7 +37,10 @@ class _HabitationDetailsState extends State<HabitationDetails> {
           ),
           Container(
             margin: EdgeInsets.all(8.0),
-            child: Text(widget._habitation.adresse),
+            child: Text(
+              widget._habitation.adresse,
+              style: LocationTextStyle.subTitleboldTextStyle
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -63,7 +71,7 @@ class _HabitationDetailsState extends State<HabitationDetails> {
             margin: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               format.format(widget._habitation.prixmois),
-              // Style à faire
+              style: LocationTextStyle.priceTextStyle
             ),
           ),
           Container(
