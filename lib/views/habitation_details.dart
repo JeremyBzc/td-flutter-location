@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:location/models/habitation.dart';
 import 'package:location/share/location_style.dart';
 import 'package:location/share/location_text_style.dart';
+import 'package:location/views/share/habitation_features_widget.dart';
 import 'package:location/views/share/habitation_option.dart';
 
 
@@ -42,14 +43,7 @@ class _HabitationDetailsState extends State<HabitationDetails> {
               style: LocationTextStyle.subTitleboldTextStyle
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              HabitationOption(Icons.group, "${widget._habitation.nbpersonnes} personnes"),
-              HabitationOption(Icons.bed, "${widget._habitation.chambres} chambres"),
-              HabitationOption(Icons.fit_screen, "${widget._habitation.superficie}")
-            ],
-          ),
+          HabitationFeaturesWidget(widget._habitation),
           _buildRentButton(),
         ],
       ),

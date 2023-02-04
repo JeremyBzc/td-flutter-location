@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:location/models/habitation.dart';
 import 'package:location/views/share/habitation_option.dart';

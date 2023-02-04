@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:location/models/habitation.dart';
 import 'package:location/services/habitation_service.dart';
 import 'package:location/views/habitation_details.dart';
+import 'package:location/views/share/habitation_features_widget.dart';
 import 'share/habitation_option.dart';
 
 
@@ -80,7 +81,7 @@ class HabitationList extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Text(format.format(habitation.prixmois),
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Roboto',
                   fontSize: 22,
@@ -88,13 +89,7 @@ class HabitationList extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              HabitationOption(Icons.group, "${habitation.chambres} personnes"),
-              HabitationOption(Icons.fit_screen, "${habitation.superficie}, m2"),
-            ],
-          ),
+          HabitationFeaturesWidget(habitation)
         ],
       ),
     );
