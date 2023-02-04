@@ -63,6 +63,7 @@ class _HabitationDetailsState extends State<HabitationDetails> {
             margin: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               format.format(widget._habitation.prixmois),
+              // Style à faire
             ),
           ),
           Container(
