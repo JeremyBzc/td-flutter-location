@@ -5,6 +5,7 @@ import 'package:location/views/share/habitation_option.dart';
 class HabitationFeaturesWidget extends StatelessWidget {
   final Habitation _habitation;
 
+
   const HabitationFeaturesWidget(this._habitation, {Key? key}) : super(key: key);
   
   @override

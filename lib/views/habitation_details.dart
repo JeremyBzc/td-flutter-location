@@ -43,7 +43,51 @@ class _HabitationDetailsState extends State<HabitationDetails> {
             ),
           ),
           HabitationFeaturesWidget(widget._habitation),
+          if(widget._habitation.options.isNotEmpty)(
+              Container(
+                margin: EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      "Inclus",
+                      style: LocationTextStyle.subTitleboldTextStyle,
+                    ),
+                    Expanded(
+                        child: Container(
+                          margin: EdgeInsets.only(left: 10.0 ,right: 10.0),
+                          child: Divider(
+                            height: 36,
+                            thickness: 1,
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+              )
+          ),
           _buildItems(),
+          if(widget._habitation.optionpayantes.isNotEmpty)(
+              Container(
+                margin: EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      "Options",
+                      style: LocationTextStyle.subTitleboldTextStyle,
+                    ),
+                    Expanded(
+                        child: Container(
+                          margin: EdgeInsets.only(left: 10.0 ,right: 10.0),
+                          child: Divider(
+                            height: 36,
+                            thickness: 1,
+                          ),
+                        )
+                    ),
+                  ],
+                ),
+              )
+          ),
           _buildOptionsPayantes(),
           _buildRentButton(),
         ],
@@ -52,6 +96,8 @@ class _HabitationDetailsState extends State<HabitationDetails> {
   }
   _buildItems() {
     var width = (MediaQuery.of(context).size.width / 2) - 15;
+
+    HabitationFeaturesWidget(widget._habitation);
 
     return Wrap(
         spacing: 2.0,
@@ -78,10 +124,11 @@ class _HabitationDetailsState extends State<HabitationDetails> {
     var width = (MediaQuery.of(context).size.width / 2 ) - 15;
     var format = NumberFormat("### €");
 
+
     return Wrap(
         spacing: 2.0,
         children: Iterable.generate(
-            widget._habitation.options.length,
+            widget._habitation.optionpayantes.length ,
                 (i) => Container(
                 margin: EdgeInsets.all(2.0),
                 padding: EdgeInsets.only(left: 15.0),
