@@ -4,7 +4,6 @@ import 'package:location/models/habitation.dart';
 import 'package:location/services/habitation_service.dart';
 import 'package:location/views/habitation_details.dart';
 import 'package:location/views/share/habitation_features_widget.dart';
-import 'share/habitation_option.dart';
 
 
 class HabitationList extends StatelessWidget {

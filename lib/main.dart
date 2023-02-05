@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:location/models/habitation.dart';
+import 'package:location/models/typehabitat.dart';
 import 'package:location/services/habitation_service.dart';
 import 'package:location/share/location_style.dart';
 import 'package:location/share/location_text_style.dart';
