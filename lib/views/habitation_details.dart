@@ -4,7 +4,6 @@ import 'package:location/models/habitation.dart';
 import 'package:location/share/location_style.dart';
 import 'package:location/share/location_text_style.dart';
 import 'package:location/views/share/habitation_features_widget.dart';
-import 'package:location/views/share/habitation_option.dart';
 
 
 class HabitationDetails extends StatefulWidget {
@@ -23,7 +22,7 @@ class _HabitationDetailsState extends State<HabitationDetails> {
       appBar: AppBar(
         title: Text(
           widget._habitation.libelle,
-          style: LocationTextStyle.boldTextStyle
+          style: LocationTextStyle.baseTextStyle,
         ),
       ),
       body: ListView(
@@ -44,9 +43,37 @@ class _HabitationDetailsState extends State<HabitationDetails> {
             ),
           ),
           HabitationFeaturesWidget(widget._habitation),
+          _buildItems(),
+          //_buildOptionsPayantes(),
           _buildRentButton(),
         ],
       ),
+    );
+  }
+  _buildItems() {
+    var width = (MediaQuery.of(context).size.width / 2 ) - 15;
+
+    return Wrap(
+      spacing: 2.0,
+      children: Iterable.generate(
+        widget._habitation.options.length,
+          (i) => Container(
+           padding: EdgeInsets.only(left: 15),
+            child: Container(
+              margin: EdgeInsets.all(2),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(widget._habitation.options[i].libelle),
+                  Text(
+                      widget._habitation.options[i].description,
+                      style: LocationTextStyle.regularGreyTextStyle
+                  ),
+                ],
+              ),
+            ),
+          ),
+      ).toList(),
     );
   }
   _buildRentButton() {
