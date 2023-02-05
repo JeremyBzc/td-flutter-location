@@ -44,37 +44,62 @@ class _HabitationDetailsState extends State<HabitationDetails> {
           ),
           HabitationFeaturesWidget(widget._habitation),
           _buildItems(),
-          //_buildOptionsPayantes(),
+          _buildOptionsPayantes(),
           _buildRentButton(),
         ],
       ),
     );
   }
   _buildItems() {
-    var width = (MediaQuery.of(context).size.width / 2 ) - 15;
+    var width = (MediaQuery.of(context).size.width / 2) - 15;
 
     return Wrap(
-      spacing: 2.0,
-      children: Iterable.generate(
-        widget._habitation.options.length,
-          (i) => Container(
-           padding: EdgeInsets.only(left: 15),
-            child: Container(
-              margin: EdgeInsets.all(2),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(widget._habitation.options[i].libelle),
-                  Text(
-                      widget._habitation.options[i].description,
-                      style: LocationTextStyle.regularGreyTextStyle
-                  ),
-                ],
-              ),
-            ),
-          ),
-      ).toList(),
+        spacing: 2.0,
+        children: Iterable.generate(
+            widget._habitation.options.length,
+                (i) => Container(
+                margin: EdgeInsets.all(2.0),
+                padding: EdgeInsets.only(left: 15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget._habitation.options.elementAt(i).libelle),
+                    Text(
+                      widget._habitation.options.elementAt(i).description,
+                      style: LocationTextStyle.regularGreyTextStyle,
+                    ),
+                  ],
+                )
+            )
+        ).toList()
     );
+  }
+  _buildOptionsPayantes() {
+    var width = (MediaQuery.of(context).size.width / 2 ) - 15;
+    var format = NumberFormat("### €");
+
+    return Wrap(
+        spacing: 2.0,
+        children: Iterable.generate(
+            widget._habitation.options.length,
+                (i) => Container(
+                margin: EdgeInsets.all(2.0),
+                padding: EdgeInsets.only(left: 15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget._habitation.optionpayantes.elementAt(i).libelle),
+                    Text(
+                      format.format(widget._habitation.optionpayantes.elementAt(i).prix),
+                      style: LocationTextStyle.regularGreyTextStyle,
+                    ),
+                  ],
+                )
+            )
+        ).toList()
+    );
+
+
   }
   _buildRentButton() {
     var format = NumberFormat("### €");
