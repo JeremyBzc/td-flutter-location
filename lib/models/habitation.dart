@@ -54,4 +54,9 @@ class OptionPayante extends Option {
     : prix = json['prix'],
     super.fromJson(json['optionpayante']);
 }
+class OptionPayanteCheck extends OptionPayante {
+  bool checked;
+
+  OptionPayanteCheck(super.id, super.libelle, this.checked, {super.description = "", super.prix});
+}
 

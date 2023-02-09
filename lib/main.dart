@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:location/models/habitation.dart';
 import 'package:location/models/typehabitat.dart';
@@ -7,8 +8,6 @@ import 'package:location/share/location_style.dart';
 import 'package:location/share/location_text_style.dart';
 import 'package:location/views/habitation_details.dart';
 import 'package:location/views/habitation_list.dart';
-
-
 
 
 void main() {
@@ -27,6 +26,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Mes locations'),
+        localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
+        supportedLocales: const [Locale('en'), Locale('fr')],
+
     );
   }
 }
