@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:location/models/resa_location.dart';
 
 class DateWidget extends StatelessWidget {
   final DateTime dateDebut;
