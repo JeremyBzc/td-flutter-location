@@ -107,7 +107,6 @@ class _ResaLocationState extends State<ResaLocation> {
       setState(() {
         dateDebut = datePicked.start;
         dateFin = datePicked.end;
-        //DateFormat('dd MMM yyyy', 'fr').format(dateDebut)
       });
     }
   }
