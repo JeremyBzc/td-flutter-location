@@ -82,9 +82,6 @@ class _ResaLocationState extends State<ResaLocation> {
     return Container(
       margin: EdgeInsets.all(10),
       padding:  EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        border: Border.all(width: 2.0, color: const Color(0xFFFFFFFF)),
-      ),
       child: GestureDetector (
         onTap:() {
           dateTimeRangePicker();
