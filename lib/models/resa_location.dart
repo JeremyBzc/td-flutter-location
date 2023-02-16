@@ -7,13 +7,10 @@ import 'package:location/views/share/date_widget.dart';
 
 import '../share/location_text_style.dart';
 
-
 class ResaLocation extends StatefulWidget {
-
   final Habitation _habitation;
 
   const ResaLocation(this._habitation, {Key? key}) : super(key: key);
-
 
   @override
   State<ResaLocation> createState() => _ResaLocationState();
@@ -22,17 +19,15 @@ class ResaLocation extends StatefulWidget {
 class _ResaLocationState extends State<ResaLocation> {
   DateTime dateDebut = DateTime.now();
   DateTime dateFin = DateTime.now();
-  String nbPersonnes = '1';
+  int nbPersonnes = 1;
   //int prixTotal = 0;
   List<OptionPayanteCheck> optionPayanteChecks = [];
-
-  final TextEditingController startDateController = TextEditingController(),
-      endDateController = TextEditingController();
+  List<int> dropdownvalue = [1, 2, 3, 4, 5, 6, 7, 8];
+  List<bool> _checkboxState = [];
 
   var format = NumberFormat("### €");
 
   // get prixTotal => null;
-
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +42,15 @@ class _ResaLocationState extends State<ResaLocation> {
         children: [
           _buildResume(),
           _buildDates(),
-          //_buildNbPersonnes(),
-          //_buildOptionsPayantes(context),
+          _buildNbPersonnes(),
+          _buildOptionsPayantes(context),
           //TotalWidget(prixTotal),
           //_buildRentButton(),
         ],
       ),
     );
   }
+
   _buildResume() {
     return Container(
       margin: EdgeInsets.all(2),
@@ -78,18 +74,141 @@ class _ResaLocationState extends State<ResaLocation> {
       ),
     );
   }
+
   _buildDates() {
     return Container(
       margin: EdgeInsets.all(10),
-      padding:  EdgeInsets.all(10),
-      child: GestureDetector (
-        onTap:() {
+      padding: EdgeInsets.all(10),
+      child: GestureDetector(
+        onTap: () {
           dateTimeRangePicker();
         },
         child: DateWidget(dateDebut, dateFin),
       ),
     );
   }
+  _buildNbPersonnes() {
+    return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(5),
+      child: Row(
+        children: [
+          Text('Nombre de personnes : '),
+          DropdownButton<int>(
+            value: nbPersonnes,
+            items: List.generate(8, (index) => index+1)
+                .map((nb) => DropdownMenuItem<int>(
+              value: nb,
+              child: Text('$nb'),
+            ))
+                .toList(),
+            onChanged: (newValue) {
+              setState(() {
+                nbPersonnes = newValue!;
+              });
+            },
+          ),
+        ],
+      )
+    );
+  }
+  _buildOptionsPayantes(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: widget._habitation.optionpayantes.map((option) => Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.add_shopping_cart_rounded),
+              SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          option.libelle + '',
+                          style: LocationTextStyle.regularTextStyle,
+                        ),
+                        Text(
+                          '(${format.format(option.prix)})',
+                          style: LocationTextStyle.regularTextStyle,
+                        ),
+                      ],
+                    ),
+                    if (option.description != null)
+                      Text(
+                        option.description!,
+                        style: LocationTextStyle.regularGreyTextStyle,
+                      ),
+                  ],
+                ),
+              ),
+              Checkbox(value: false, onChanged: (bool? value) {})
+            ],
+          ),
+        )).toList(),
+      ),
+    );
+  }
+
+
+  /*_buildOptionsPayantes(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: widget._habitation.optionpayantes.map((option) => Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.add_shopping_cart_rounded),
+              SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          option.libelle + '',
+                          style: LocationTextStyle.regularTextStyle,
+                        ),
+                        Text(
+                          '(${format.format(option.prix)})',
+                          style: LocationTextStyle.regularTextStyle,
+                        ),
+                      ],
+                    ),
+                    if (option.description != null)
+                      Text(
+                        option.description!,
+                        style: LocationTextStyle.regularGreyTextStyle,
+                      ),
+                  ],
+                ),
+              ),
+              Checkbox(
+                value: option.checked,
+                onChanged: (value) {
+                  setState(() {
+                    option.checked = value!;
+                  });
+                },
+              ),
+            ],
+          ),
+        )).toList(),
+      ),
+    );
+  }*/
   dateTimeRangePicker() async {
     DateTimeRange? datePicked = await showDateRangePicker(
       context: context,
@@ -107,8 +226,4 @@ class _ResaLocationState extends State<ResaLocation> {
       });
     }
   }
-
-
 }
-
-

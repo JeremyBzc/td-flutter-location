@@ -23,7 +23,6 @@ class _HabitationDetailsState extends State<HabitationDetails> {
       appBar: AppBar(
         title: Text(
           widget._habitation.libelle,
-          style: LocationTextStyle.baseTextStyle,
         ),
       ),
       body: ListView(
@@ -146,8 +145,6 @@ class _HabitationDetailsState extends State<HabitationDetails> {
             )
         ).toList()
     );
-
-
   }
   _buildRentButton() {
     var format = NumberFormat("### €");
