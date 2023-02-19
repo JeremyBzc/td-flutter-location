@@ -8,6 +8,7 @@ import 'package:location/share/location_style.dart';
 import 'package:location/share/location_text_style.dart';
 import 'package:location/views/habitation_details.dart';
 import 'package:location/views/habitation_list.dart';
+import 'package:location/views/profil.dart';
 
 
 void main() {
@@ -26,6 +27,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Mes locations'),
+      routes: {
+          //'/': (context) => const Profil(),
+          //Profil.routeName:(context) => const Profil(),
+          //LoginPage.routeName:(context) => const LoginPage('/'),
+          //LocationList.routeName:(context) => const LocationList(),
+          //ValidationLocation.routeName:(context) => const ValidationLocation(),
+        },
         localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
         supportedLocales: const [Locale('en'), Locale('fr')],
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../share/location_style.dart';
+
 class DateWidget extends StatelessWidget {
   final DateTime dateDebut;
   final DateTime dateFin;
@@ -38,7 +40,7 @@ class DateWidget extends StatelessWidget {
         _buildDatePart(dateDebut),
         SizedBox(width: 30),
         CircleAvatar(
-          backgroundColor: Colors.blue.shade900,
+          backgroundColor: LocationStyle.backgroundColorPurple,
           child: Icon(Icons.arrow_forward),
         ),
         SizedBox(width: 30),

@@ -124,7 +124,6 @@ class _HabitationDetailsState extends State<HabitationDetails> {
     var width = (MediaQuery.of(context).size.width / 2 ) - 15;
     var format = NumberFormat("### €");
 
-
     return Wrap(
         spacing: 2.0,
         children: Iterable.generate(

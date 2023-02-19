@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:location/views/share/date_widget.dart';
 
+import '../share/location_style.dart';
 import '../share/location_text_style.dart';
 
 class ResaLocation extends StatefulWidget {
@@ -21,13 +22,10 @@ class _ResaLocationState extends State<ResaLocation> {
   DateTime dateFin = DateTime.now();
   int nbPersonnes = 1;
   //int prixTotal = 0;
-  List<OptionPayanteCheck> optionPayanteChecks = [];
+  //List<OptionPayanteCheck> optionPayanteChecks = [];
   List<int> dropdownvalue = [1, 2, 3, 4, 5, 6, 7, 8];
-  List<bool> _checkboxState = [];
 
   var format = NumberFormat("### €");
-
-  // get prixTotal => null;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +42,8 @@ class _ResaLocationState extends State<ResaLocation> {
           _buildDates(),
           _buildNbPersonnes(),
           _buildOptionsPayantes(context),
-          //TotalWidget(prixTotal),
-          //_buildRentButton(),
+          _TotalWidget(),
+          _buildRentButton(),
         ],
       ),
     );
@@ -156,59 +154,73 @@ class _ResaLocationState extends State<ResaLocation> {
       ),
     );
   }
-
-
-  /*_buildOptionsPayantes(BuildContext context) {
+  _TotalWidget() {
     return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: widget._habitation.optionpayantes.map((option) => Padding(
-          padding: const EdgeInsets.only(bottom: 10),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(Icons.add_shopping_cart_rounded),
-              SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          option.libelle + '',
-                          style: LocationTextStyle.regularTextStyle,
-                        ),
-                        Text(
-                          '(${format.format(option.prix)})',
-                          style: LocationTextStyle.regularTextStyle,
-                        ),
-                      ],
-                    ),
-                    if (option.description != null)
-                      Text(
-                        option.description!,
-                        style: LocationTextStyle.regularGreyTextStyle,
-                      ),
-                  ],
-                ),
+      padding: EdgeInsets.all(12),
+      margin: EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: LocationStyle.backgroundColorPurple,
+          width: 2, // épaisseur de la bordure
+        ),
+      ),
+      // padding: EdgeInsets.all(10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Text(
+              "TOTAL",
+              style: TextStyle(
+                color: LocationStyle.backgroundColorPurple,
+                fontSize: 18,
               ),
-              Checkbox(
-                value: option.checked,
-                onChanged: (value) {
-                  setState(() {
-                    option.checked = value!;
-                  });
-                },
-              ),
-            ],
+              textAlign: TextAlign.center,
+            ),
           ),
-        )).toList(),
+          Text(
+            "600.00€",
+            style: TextStyle(
+              color: LocationStyle.backgroundColorPurple,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.right,
+          ),
+        ],
       ),
     );
-  }*/
+  }
+
+  _buildRentButton() {
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ResaLocation(widget._habitation)));
+      },
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+          color: LocationStyle.backgroundColorPurple,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Text(
+                "Louer",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
   dateTimeRangePicker() async {
     DateTimeRange? datePicked = await showDateRangePicker(
       context: context,
