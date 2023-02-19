@@ -4,6 +4,7 @@ import 'package:location/models/habitation.dart';
 import 'package:location/models/resa_location.dart';
 import 'package:location/share/location_style.dart';
 import 'package:location/share/location_text_style.dart';
+import 'package:location/views/share/bottom_navigation_bar_widget.dart';
 import 'package:location/views/share/habitation_features_widget.dart';
 
 
@@ -92,6 +93,7 @@ class _HabitationDetailsState extends State<HabitationDetails> {
           _buildRentButton(),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBarWidget(3),
     );
   }
   _buildItems() {
