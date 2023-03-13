@@ -11,6 +11,7 @@ import 'package:location/views/habitation_list.dart';
 import 'package:location/views/location_list.dart';
 import 'package:location/views/login_page.dart';
 import 'package:location/views/profil.dart';
+import 'package:location/views/validation_location.dart';
 import 'package:location/views/share/bottom_navigation_bar_widget.dart';
 
 
@@ -36,8 +37,8 @@ class MyApp extends StatelessWidget {
           // '/': (context) => Profil(),
           Profil.routeName:(context) => Profil(),
           LoginPage.routeName:(context) => const LoginPage('/'),
-          //LocationList.routeName:(context) => const LocationList(),
-          //ValidationLocation.routeName:(context) => const ValidationLocation(),*/
+          LocationList.routeName:(context) => LocationList(),
+          //ValidationLocation.routeName:(context) => const ValidationLocation(),
         },
         localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
         supportedLocales: const [Locale('en'), Locale('fr')],
