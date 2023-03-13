@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../share/location_style.dart';
+import '../../share/location_text_style.dart';
 
 class DateWidget extends StatelessWidget {
   final DateTime dateDebut;
@@ -10,25 +11,22 @@ class DateWidget extends StatelessWidget {
   const DateWidget(this.dateDebut, this.dateFin, {Key? key}) : super(key: key);
 
   Widget _buildDatePart(DateTime date) {
-    return Container(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Icon(
-            Icons.calendar_today_outlined,
-            size: 20,
-            color: Colors.black
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Icon(
+          Icons.calendar_today_outlined,
+          size: 20,
+          color: Colors.black
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 5),
+          child: Text(DateFormat('dd MMM yyyy', 'fr').format(date),
+              style: LocationTextStyle.boldTextStyle,
+
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 5),
-            child: Text(DateFormat('dd MMM yyyy', 'fr').format(date),
-                style: const TextStyle(
-                  fontSize: 18,
-                ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -38,12 +36,15 @@ class DateWidget extends StatelessWidget {
      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _buildDatePart(dateDebut),
-        SizedBox(width: 30),
+        const SizedBox(width: 30),
         CircleAvatar(
           backgroundColor: LocationStyle.backgroundColorPurple,
-          child: Icon(Icons.arrow_forward),
+          child: const Icon(
+              Icons.arrow_forward,
+              color: Colors.white,
+          ),
         ),
-        SizedBox(width: 30),
+        const SizedBox(width: 30),
         _buildDatePart(dateFin),
       ],
     );

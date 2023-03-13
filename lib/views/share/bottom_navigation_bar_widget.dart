@@ -49,8 +49,8 @@ class BottomNavigationBarWidget extends StatelessWidget {
             Navigator.pushNamed(context, 'profil');
             break;
         }
-        // Navigator.pushAndRemoveUntil(
-        //   context, page, (route) => false);
+        /*Navigator.pushAndRemoveUntil(
+           context, page, (route) => false);*/
       },
 
     );

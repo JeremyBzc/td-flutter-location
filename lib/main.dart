@@ -71,7 +71,7 @@ class MyHomePage extends StatelessWidget {
           ],
         )
       ),
-      bottomNavigationBar: BottomNavigationBarWidget(1),
+      bottomNavigationBar: BottomNavigationBarWidget(0),
     );
   }
   _buildTypeHabitat(BuildContext context) {

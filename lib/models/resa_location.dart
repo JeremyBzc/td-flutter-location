@@ -22,14 +22,15 @@ class _ResaLocationState extends State<ResaLocation> {
   DateTime dateFin = DateTime.now();
   int nbPersonnes = 1;
   //int prixTotal = 0;
-  //List<OptionPayanteCheck> optionPayanteChecks = [];
+  List<OptionPayanteCheck> optionPayanteChecks = [];
   List<int> dropdownvalue = [1, 2, 3, 4, 5, 6, 7, 8];
+  bool isAlreadyLoaded = false;
 
   var format = NumberFormat("### €");
 
   @override
   Widget build(BuildContext context) {
-    //_loadOptionPayantes();
+    _loadOptionsPayantes();
 
     return Scaffold(
       appBar: AppBar(
@@ -110,50 +111,35 @@ class _ResaLocationState extends State<ResaLocation> {
       )
     );
   }
+  _loadOptionsPayantes() {
+    if (!isAlreadyLoaded) {
+      for (var option in widget._habitation.optionpayantes) {
+        optionPayanteChecks.add(OptionPayanteCheck(option.id, option.libelle, false, description: option.description, prix: option.prix));
+      }
+      isAlreadyLoaded = true;
+    }
+  }
   _buildOptionsPayantes(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(5),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: widget._habitation.optionpayantes.map((option) => Padding(
-          padding: const EdgeInsets.only(bottom: 10),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(Icons.add_shopping_cart_rounded),
-              SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          option.libelle + '',
-                          style: LocationTextStyle.regularTextStyle,
-                        ),
-                        Text(
-                          '(${format.format(option.prix)})',
-                          style: LocationTextStyle.regularTextStyle,
-                        ),
-                      ],
-                    ),
-                    if (option.description != null)
-                      Text(
-                        option.description!,
-                        style: LocationTextStyle.regularGreyTextStyle,
-                      ),
-                  ],
-                ),
-              ),
-              Checkbox(value: false, onChanged: (bool? value) {})
-            ],
+        children: Iterable.generate(
+          optionPayanteChecks.length,
+              (i) => CheckboxListTile(
+            title: Text("${widget._habitation.optionpayantes[i].libelle} (${widget._habitation.optionpayantes[i].prix} €)"),
+            subtitle: Text(optionPayanteChecks[i].description),
+            value: optionPayanteChecks[i].checked,
+            selected: optionPayanteChecks[i].checked,
+            onChanged: (bool? value) {
+              setState(() {
+                optionPayanteChecks[i].checked = value!;
+              });
+            },
           ),
-        )).toList(),
+        ).toList(),
       ),
     );
   }
+
   _TotalWidget() {
     return Container(
       padding: EdgeInsets.all(12),
@@ -205,7 +191,7 @@ class _ResaLocationState extends State<ResaLocation> {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: const [
             Expanded(
               child: Text(
                 "Louer",

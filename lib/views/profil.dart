@@ -35,7 +35,7 @@ class _ProfilState extends State<Profil> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBarWidget(this.x),
+      bottomNavigationBar: BottomNavigationBarWidget(3),
     );
   }
 }
