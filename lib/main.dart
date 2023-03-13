@@ -8,6 +8,8 @@ import 'package:location/share/location_style.dart';
 import 'package:location/share/location_text_style.dart';
 import 'package:location/views/habitation_details.dart';
 import 'package:location/views/habitation_list.dart';
+import 'package:location/views/location_list.dart';
+import 'package:location/views/login_page.dart';
 import 'package:location/views/profil.dart';
 import 'package:location/views/share/bottom_navigation_bar_widget.dart';
 
@@ -29,19 +31,22 @@ class MyApp extends StatelessWidget {
       ),
       //home: MyHomePage(title: 'Mes locations'),
       routes: {
-          '/': (context) =>  MyHomePage(title: 'Home page'),
+          '/': (context) =>  MyHomePage(title: 'Mes locations'),
           'profil': (context) =>  Profil(),
-          //'/': (context) => Profil(),
-          //Profil.routeName:(context) => Profil(),
-          //LoginPage.routeName:(context) => const LoginPage('/'),
+          // '/': (context) => Profil(),
+          Profil.routeName:(context) => Profil(),
+          LoginPage.routeName:(context) => const LoginPage('/'),
           //LocationList.routeName:(context) => const LocationList(),
-          //ValidationLocation.routeName:(context) => const ValidationLocation(),
+          //ValidationLocation.routeName:(context) => const ValidationLocation(),*/
         },
         localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
         supportedLocales: const [Locale('en'), Locale('fr')],
 
     );
   }
+}
+
+class ValidationLocation {
 }
 class MyHomePage extends StatelessWidget {
   final HabitationService service = HabitationService();

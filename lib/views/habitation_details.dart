@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:location/models/habitation.dart';
-import 'package:location/models/resa_location.dart';
+import 'package:location/views/resa_location.dart';
 import 'package:location/share/location_style.dart';
 import 'package:location/share/location_text_style.dart';
 import 'package:location/views/share/bottom_navigation_bar_widget.dart';
@@ -37,7 +37,7 @@ class _HabitationDetailsState extends State<HabitationDetails> {
             ),
           ),
           Container(
-            margin: EdgeInsets.all(8.0),
+            margin: const EdgeInsets.all(8.0),
             child: Text(
               widget._habitation.adresse,
               style: LocationTextStyle.subTitleboldTextStyle
@@ -46,7 +46,7 @@ class _HabitationDetailsState extends State<HabitationDetails> {
           HabitationFeaturesWidget(widget._habitation),
           if(widget._habitation.options.isNotEmpty)(
               Container(
-                margin: EdgeInsets.all(8.0),
+                margin: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Text(
@@ -55,8 +55,8 @@ class _HabitationDetailsState extends State<HabitationDetails> {
                     ),
                     Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 10.0 ,right: 10.0),
-                          child: Divider(
+                          margin: const EdgeInsets.only(left: 10.0 ,right: 10.0),
+                          child: const Divider(
                             height: 36,
                             thickness: 1,
                           ),
@@ -69,7 +69,7 @@ class _HabitationDetailsState extends State<HabitationDetails> {
           _buildItems(),
           if(widget._habitation.optionpayantes.isNotEmpty)(
               Container(
-                margin: EdgeInsets.all(8.0),
+                margin: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     Text(
@@ -78,8 +78,8 @@ class _HabitationDetailsState extends State<HabitationDetails> {
                     ),
                     Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 10.0 ,right: 10.0),
-                          child: Divider(
+                          margin: const EdgeInsets.only(left: 10.0 ,right: 10.0),
+                          child: const Divider(
                             height: 36,
                             thickness: 1,
                           ),
@@ -131,8 +131,8 @@ class _HabitationDetailsState extends State<HabitationDetails> {
         children: Iterable.generate(
             widget._habitation.optionpayantes.length ,
                 (i) => Container(
-                margin: EdgeInsets.all(2.0),
-                padding: EdgeInsets.only(left: 15.0),
+                margin: const EdgeInsets.all(2.0),
+                padding: const EdgeInsets.only(left: 15.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -167,7 +167,7 @@ class _HabitationDetailsState extends State<HabitationDetails> {
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 8.0),
+            margin: const EdgeInsets.symmetric(horizontal: 8.0),
             child: ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -176,7 +176,7 @@ class _HabitationDetailsState extends State<HabitationDetails> {
                     builder: (context) => ResaLocation(widget._habitation))
                 );
               },
-              child: Text('Louer'),
+              child: const Text('Louer'),
             ),
           ),
         ],

@@ -1,41 +1,26 @@
-import 'package:location/views/share/bottom_navigation_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:location/views/share/bottom_navigation_bar_widget.dart';
 
 class Profil extends StatefulWidget {
+  static const String routeName = "/profil";
+
+  const Profil({Key? key}) : super(key: key);
+
   @override
-  _ProfilState createState() => _ProfilState();
+  State<Profil> createState() => _ProfilState();
 }
 
 class _ProfilState extends State<Profil> {
-  final int x = 0;
-  // Définition des variables pour le nom et le prénom
-  String _nom = 'Doe';
-  String _prenom = 'John';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Profil'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: 20),
-            Text(
-              'Nom: $_nom',
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Prénom: $_prenom',
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
+        appBar: AppBar(
+          title: const Text(
+            "Profil",
+          ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBarWidget(3),
+        bottomNavigationBar: const BottomNavigationBarWidget(3),
+        body: const Text("Profil à faire (WIP)")
     );
   }
 }
