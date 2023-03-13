@@ -20,10 +20,10 @@ class ResaLocation extends StatefulWidget {
 class _ResaLocationState extends State<ResaLocation> {
   DateTime dateDebut = DateTime.now();
   DateTime dateFin = DateTime.now();
-  int nbPersonnes = 1;
-  //int prixTotal = 0;
+  String nbPersonnes = "1";
+  List<String> listNbPersonnes = <String>["1", "2", "3", "4", "5", "6", "7", "8"];
+  double prixTotal = 0.0;
   List<OptionPayanteCheck> optionPayanteChecks = [];
-  List<int> dropdownvalue = [1, 2, 3, 4, 5, 6, 7, 8];
   bool isAlreadyLoaded = false;
 
   var format = NumberFormat("### €");
@@ -34,16 +34,21 @@ class _ResaLocationState extends State<ResaLocation> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Réservation'),
+        title: const Text('Réservation'),
       ),
       body: ListView(
-        padding: EdgeInsets.all(4.0),
+        padding: const EdgeInsets.all(4.0),
         children: [
           _buildResume(),
+          const Divider(indent: 10),
           _buildDates(),
+          const Divider(indent: 10),
           _buildNbPersonnes(),
+          const Divider(indent: 10),
           _buildOptionsPayantes(context),
-          _TotalWidget(),
+          const Divider(indent: 10),
+          _TotalWidget(prixTotal),
+
           _buildRentButton(),
         ],
       ),
@@ -52,7 +57,7 @@ class _ResaLocationState extends State<ResaLocation> {
 
   _buildResume() {
     return Container(
-      margin: EdgeInsets.all(2),
+      margin: const EdgeInsets.all(2),
       child: Material(
         child: ListTile(
           leading: Icon(Icons.house_rounded),
@@ -74,10 +79,10 @@ class _ResaLocationState extends State<ResaLocation> {
     );
   }
 
+
   _buildDates() {
     return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: GestureDetector(
         onTap: () {
           dateTimeRangePicker();
@@ -88,25 +93,29 @@ class _ResaLocationState extends State<ResaLocation> {
   }
   _buildNbPersonnes() {
     return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(5),
+      margin: const EdgeInsets.all(10),
       child: Row(
         children: [
-          Text('Nombre de personnes : '),
-          DropdownButton<int>(
+          const Text('Nombre de personnes : '),
+          DropdownButton<String>(
             value: nbPersonnes,
-            items: List.generate(8, (index) => index+1)
-                .map((nb) => DropdownMenuItem<int>(
-              value: nb,
-              child: Text('$nb'),
-            ))
-                .toList(),
-            onChanged: (newValue) {
+            underline: Container(
+              height: 2,
+              color: LocationStyle.backgroundColorPurple,
+            ),
+            icon: const Icon(Icons.people),
+            onChanged: (String? value) {
               setState(() {
-                nbPersonnes = newValue!;
+                nbPersonnes = value!;
               });
             },
-          ),
+            items: listNbPersonnes.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          )
         ],
       )
     );
@@ -116,31 +125,35 @@ class _ResaLocationState extends State<ResaLocation> {
       for (var option in widget._habitation.optionpayantes) {
         optionPayanteChecks.add(OptionPayanteCheck(option.id, option.libelle, false, description: option.description, prix: option.prix));
       }
+      prixTotal = widget._habitation.prixmois;
       isAlreadyLoaded = true;
     }
   }
   _buildOptionsPayantes(BuildContext context) {
-    return Container(
-      child: Column(
-        children: Iterable.generate(
-          optionPayanteChecks.length,
-              (i) => CheckboxListTile(
-            title: Text("${widget._habitation.optionpayantes[i].libelle} (${widget._habitation.optionpayantes[i].prix} €)"),
-            subtitle: Text(optionPayanteChecks[i].description),
-            value: optionPayanteChecks[i].checked,
-            selected: optionPayanteChecks[i].checked,
-            onChanged: (bool? value) {
-              setState(() {
-                optionPayanteChecks[i].checked = value!;
-              });
-            },
-          ),
-        ).toList(),
-      ),
+    return Column(
+      children: Iterable.generate(
+        optionPayanteChecks.length,
+            (i) => CheckboxListTile(
+          title: Text("${widget._habitation.optionpayantes[i].libelle} (${widget._habitation.optionpayantes[i].prix} €)"),
+          subtitle: Text(optionPayanteChecks[i].description),
+          value: optionPayanteChecks[i].checked,
+          selected: optionPayanteChecks[i].checked,
+          onChanged: (bool? value) {
+            setState(() {
+              optionPayanteChecks[i].checked = value!;
+              if (value) {
+                prixTotal += optionPayanteChecks[i].prix;
+              } else {
+                prixTotal -= optionPayanteChecks[i].prix;
+              }
+            });
+          },
+        ),
+      ).toList(),
     );
   }
 
-  _TotalWidget() {
+  _TotalWidget(prixTotal) {
     return Container(
       padding: EdgeInsets.all(12),
       margin: EdgeInsets.only(bottom: 10),
@@ -165,11 +178,8 @@ class _ResaLocationState extends State<ResaLocation> {
             ),
           ),
           Text(
-            "600.00€",
-            style: TextStyle(
-              color: LocationStyle.backgroundColorPurple,
-              fontSize: 18,
-            ),
+            format.format(prixTotal),
+            style: LocationTextStyle.boldTextStyle,
             textAlign: TextAlign.right,
           ),
         ],
